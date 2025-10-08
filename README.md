@@ -67,6 +67,50 @@ pnpm build
 pnpm start
 ```
 
+## Testes E2E com Cypress
+
+Este repositório inclui testes end-to-end (E2E) com Cypress cobrindo fluxos como busca de produtos e adicionar ao carrinho.
+
+Principais pontos:
+
+- Os testes estão em `cypress/e2e/` (por exemplo `search.cy.ts` e `add-product-to-cart.cy.ts`).
+- Comandos e helpers personalizados (como `searchByQuery`) ficam em `cypress/support/commands.ts` e já possuem declaração de tipos TypeScript para evitar o erro "property 'searchByQuery' does not exist".
+- Arquivos de configuração e suporte do Cypress estão em `cypress/support/` e `cypress.config.ts`.
+
+Como executar os testes localmente:
+
+Usando o Cypress em modo GUI:
+
+```powershell
+pnpm exec cypress open
+```
+
+Executar todos os testes em modo headless:
+
+```powershell
+pnpm exec cypress run
+```
+
+Executar um spec específico (ex.: busca):
+
+```powershell
+pnpm exec cypress run --spec "cypress/e2e/search.cy.ts"
+```
+
+Sugestão de scripts (opcional): adicione ao `package.json`
+
+```json
+"scripts": {
+	"cypress:open": "cypress open",
+	"cypress:run": "cypress run"
+}
+```
+
+Observações:
+
+- Este projeto usa a versão de desenvolvimento do Cypress listada em `devDependencies` (`cypress`), e não adicionamos scripts automaticamente — as instruções acima funcionam com `pnpm`.
+- Se você encontrar erro de tipagem para comandos customizados, confirme que `cypress/support/commands.ts` exporta as declarações de tipos (existem declarações no topo do arquivo neste projeto).
+
 ## 📁 Estrutura do projeto
 
 ```
